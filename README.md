@@ -70,10 +70,9 @@ NEWS_API_KEY=your_newsapi_key
 
 ## 📸 Video
 
-| Home                          | Category Filter                       | Search                            |
-| ----------------------------- | ------------------------------------- | --------------------------------- |
-| ![Home](screenshots/home.png) | ![Category](screenshots/category.png) | ![Search](screenshots/search.png) |
-
+| Video                          |
+| ----------------------------- |
+| ![Video](https://github.com/ShivanshSrivastava136/News-App/blob/main/User_Video/news%20app.mp4) |
 ---
 
 ## 📁 Folder Structure (Frontend)
