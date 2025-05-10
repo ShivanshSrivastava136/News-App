@@ -1,7 +1,3 @@
-Great! Here's a complete and professional `README.md` file for your **News Aggregator App**. You can copy and modify it as needed:
-
----
-
 # 🗞️ News Aggregator App
 
 A Flutter-based mobile application that aggregates and displays news articles from various categories. Users can browse trending news, filter by category, search for specific topics, and save their favorite articles. Built using **Flutter**, **GetX**, **Node.js**, and **MongoDB Atlas**.
@@ -26,7 +22,6 @@ A Flutter-based mobile application that aggregates and displays news articles fr
 * **Flutter** (Latest Stable Version)
 * **Dart**
 * **GetX** (State management, Navigation, Dependency Injection)
-* **Hive** (for local storage, optional)
 
 ### Backend
 
