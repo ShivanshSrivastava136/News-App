@@ -10,12 +10,11 @@ class NewsController extends GetxController {
 
   static final List<String> categories = [
     'general',
-    'business',
-    'entertainment',
-    'health',
-    'science',
+    'cricket',
+    'kkr',
+    'ipl',
     'sports',
-    'technology',
+    'team news',
   ];
 
   @override
@@ -29,10 +28,11 @@ class NewsController extends GetxController {
     isLoading.value = true;
     errorMessage.value = '';
     try {
-      var fetchedArticles = await ApiService.getTrendingNews();
+      // Fetch KKR and cricket-related news by searching for relevant terms
+      var fetchedArticles = await ApiService.searchNews('Kolkata Knight Riders OR KKR OR IPL cricket');
       articles.value = fetchedArticles;
     } catch (e) {
-      errorMessage.value = 'Failed to load trending news: $e';
+      errorMessage.value = 'Failed to load trending KKR news: $e';
       print(errorMessage.value);
     } finally {
       isLoading.value = false;
@@ -48,7 +48,27 @@ class NewsController extends GetxController {
     errorMessage.value = '';
 
     try {
-      var fetchedArticles = await ApiService.getNewsByCategory(category);
+      var fetchedArticles;
+      // Map categories to search terms for KKR-focused content
+      switch (category) {
+        case 'kkr':
+          fetchedArticles = await ApiService.searchNews('Kolkata Knight Riders OR KKR');
+          break;
+        case 'cricket':
+          fetchedArticles = await ApiService.searchNews('cricket OR IPL');
+          break;
+        case 'ipl':
+          fetchedArticles = await ApiService.searchNews('IPL OR Indian Premier League');
+          break;
+        case 'team news':
+          fetchedArticles = await ApiService.searchNews('KKR team news OR Kolkata Knight Riders players');
+          break;
+        case 'sports':
+          fetchedArticles = await ApiService.getNewsByCategory('sports');
+          break;
+        default:
+          fetchedArticles = await ApiService.searchNews('Kolkata Knight Riders OR cricket OR IPL');
+      }
       articles.value = fetchedArticles;
     } catch (e) {
       errorMessage.value = 'Failed to load $category news: $e';
@@ -69,7 +89,9 @@ class NewsController extends GetxController {
     errorMessage.value = '';
 
     try {
-      var fetchedArticles = await ApiService.searchNews(query);
+      // Enhance search query to include KKR context
+      final enhancedQuery = '$query KKR OR cricket OR IPL';
+      var fetchedArticles = await ApiService.searchNews(enhancedQuery);
       articles.value = fetchedArticles;
     } catch (e) {
       errorMessage.value = 'Failed to search news: $e';

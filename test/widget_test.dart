@@ -1,30 +1,46 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:news_app/main.dart';
+import 'package:kkr_fan_page/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('KKR Fan Page loads correctly', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(NewsApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that the KKR Fan Page title is present
+    expect(find.text('KKR Fan Page'), findsOneWidget);
+    
+    // Verify that the navigation tabs are present
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Shop'), findsOneWidget);
+    expect(find.text('Matches'), findsOneWidget);
+    expect(find.text('Players'), findsOneWidget);
+    expect(find.text('Favorites'), findsOneWidget);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('Navigation between tabs works', (WidgetTester tester) async {
+    await tester.pumpWidget(NewsApp());
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Tap on Shop tab
+    await tester.tap(find.text('Shop'));
+    await tester.pumpAndSettle();
+
+    // Verify we're on the shop page
+    expect(find.text('KKR Shop'), findsOneWidget);
+
+    // Tap on Matches tab
+    await tester.tap(find.text('Matches'));
+    await tester.pumpAndSettle();
+
+    // Verify we're on the matches page
+    expect(find.text('KKR Matches'), findsOneWidget);
+
+    // Tap on Players tab
+    await tester.tap(find.text('Players'));
+    await tester.pumpAndSettle();
+
+    // Verify we're on the players page
+    expect(find.text('KKR Players'), findsOneWidget);
   });
 }
