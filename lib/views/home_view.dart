@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News App'),
+        title: Text('KKR Fan Page'),
         centerTitle: true,
         elevation: 0,
       ),
@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search news...',
+                hintText: 'Search KKR news...',
                 prefixIcon: Icon(Icons.search),
                 suffixIcon: IconButton(
                   icon: Icon(Icons.clear),
@@ -50,7 +50,7 @@ class HomeView extends StatelessWidget {
             child: Obx(() {
               if (newsController.isLoading.value) {
                 return Center(
-                  child: SpinKitFadingCircle(color: Colors.blue),
+                  child: SpinKitFadingCircle(color: Color(0xFF512B7C)),
                 );
               }
 
@@ -86,7 +86,7 @@ class HomeView extends StatelessWidget {
               if (newsController.articles.isEmpty) {
                 return Center(
                   child: Text(
-                    'No news articles found',
+                    'No KKR news articles found',
                     style: TextStyle(fontSize: 18),
                   ),
                 );

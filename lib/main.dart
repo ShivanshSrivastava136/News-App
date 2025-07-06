@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'views/home_view.dart';
+import 'views/shop_view.dart';
+import 'views/matches_view.dart';
+import 'views/players_view.dart';
 import 'views/favorites_view.dart';
 import 'controllers/news_controller.dart';
 import 'controllers/favorites_controller.dart';
+import 'controllers/shop_controller.dart';
+import 'controllers/matches_controller.dart';
+import 'controllers/players_controller.dart';
 
 void main() {
   runApp(NewsApp());
@@ -13,14 +19,19 @@ class NewsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'News App',
+      title: 'KKR Fan Page',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        primaryColor: Color(0xFF512B7C), // KKR Purple
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xFF512B7C),
+          secondary: Color(0xFFFFD700), // KKR Gold
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.blue[800],
-          iconTheme: IconThemeData(color: Colors.blue[800]),
+          backgroundColor: Color(0xFF512B7C),
+          foregroundColor: Color(0xFFFFD700),
+          iconTheme: IconThemeData(color: Color(0xFFFFD700)),
         ),
       ),
       debugShowCheckedModeBanner: false,
@@ -35,6 +46,9 @@ class AppBindings extends Bindings {
   void dependencies() {
     Get.put(NewsController());
     Get.put(FavoritesController());
+    Get.put(ShopController());
+    Get.put(MatchesController());
+    Get.put(PlayersController());
   }
 }
 
@@ -47,6 +61,9 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomeView(),
+    ShopView(),
+    MatchesView(),
+    PlayersView(),
     FavoritesView(),
   ];
 
@@ -55,18 +72,31 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        selectedItemColor: Colors.blue[800],
+        selectedItemColor: Color(0xFF512B7C), // KKR Purple
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag),
+            label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.sports_cricket),
+            label: 'Matches',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Players',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),

@@ -27,13 +27,13 @@ class CategorySelector extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.blue : Colors.grey[200],
+                  color: isSelected ? Color(0xFF512B7C) : Colors.grey[200],
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   category[0].toUpperCase() + category.substring(1),
                   style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.black,
+                    color: isSelected ? Color(0xFFFFD700) : Colors.black,
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),

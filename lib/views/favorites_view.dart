@@ -19,7 +19,7 @@ class FavoritesView extends StatelessWidget {
       body: Obx(() {
         if (favoritesController.isLoading.value) {
           return Center(
-            child: SpinKitFadingCircle(color: Colors.blue),
+            child: SpinKitFadingCircle(color: Color(0xFF512B7C)),
           );
         }
 
